@@ -8,4 +8,4 @@ def setup():
     driver.get("https://vod.film/")
     driver.maximize_window()
     yield driver
-    # driver.quit()
+    driver.quit()
