@@ -2,7 +2,7 @@
 ### Tytuł 
 Przycisk `Wyczyść` nie resetuje zastosowanego sortowania
 
-### Środowsko 
+### Środowisko 
 - Przegladarka 
 Brave 1.84.141 (Oficjalna wersja) (64-bitowa)
 Chromium: 142.0.7444.176
@@ -26,7 +26,7 @@ Wybrane wyszukiwanie zostanie wyczyszczone i lista filmów zostanie odświeżona
 parametr odpowiedzialny za sortowanie.
 
 ### Rezultat aktualny
-Wybrane wyszukwanie pozostaje aktywne, nie można go usunąć, trzeba edytowac URL aby zobaczyć liste bez sortowania.
+Wybrane sortowanie pozostaje aktywne, nie można go usunąć, trzeba edytowac URL aby zobaczyć liste bez sortowania.
 
 ### Priorytet 
 niski

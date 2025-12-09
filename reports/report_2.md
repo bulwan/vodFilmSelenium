@@ -2,8 +2,8 @@
 ### Tytuł
 Co obejrzeć nie wyświetla propozycji po zmienie kategorii
 
-### Środowsko
-- Przegladarka 
+### Środowisko
+- Przeglądarka 
 Brave 1.84.141 (Oficjalna wersja) (64-bitowa)
 Chromium: 142.0.7444.176
 - Windows 11 Home, 24H2
@@ -27,11 +27,11 @@ Po naciśnięciu `Losuj` powinien wyświetlić się losowy serial spośród wszy
 
 ### Rezultat aktualny
 Serial nie jest losowany. Zamiast wyniku wyszukiwania wyświetla się `Wylosuj film lub serial do obejrzenia...`. 
-W zakładce network widać requesta do wylosowania serialu z gatunkiem akcja. Gatunek nie istnieje wsród 
+W zakładce network widać request do wylosowania serialu z gatunkiem akcja. Gatunek nie istnieje wsród 
 seriali, wiec request zwrócił brak wyników.
 
 ### Priorytet
-niski
+średni
 
 ### Uzasadnienie
 Brak możliwości losowania filmów nie powoduje, że użytkownik nie może korzystać z kluczowych funkcjonalności systemu.

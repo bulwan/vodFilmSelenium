@@ -1,15 +1,26 @@
+## Opis projektu
+
+Projekt automatyzacji testów E2E oraz API wraz z raportem z testów manualnych strony **https://vod.film/**.
+W repozytorium można znaleźć zautoamtyzowaną ścieżkę pozytywną, negatywną, prosty test API oraz raporty z testów
+manualnych strony. Kod został przygotowany z zachowaniem wzorca POM.
+
+Sama strona pozwala wyszukac dany film lub serial i przekierowuje do partnerów, 
+którzy posiadają produkcję w swojej ofercie.
+
+
 ## Instrukcja instalacji
 
 W repozytorium znajduje się plik `requirements.txt`. Aby zainstalować zależności użyj:
 `pip install -r requirements.txt`
 
 Po instalacji zależności, aby uruchomić wszystkie testy (test api: `test_endpoint`, testy UI: `test_search_positive`,
-`test_search_negative`) użyj: ` pytest --tb=short`
+`test_search_negative`) użyj: `pytest --tb=short`
 
 ## Wybrana biblioteka
 
-Zdecydowałam się na bibliotekę Selenium. Pracuję z użyciem tej biblioteki i Javy, z Playwrightem nie mam żadnego
-doświadczenia.
+Zdecydowałam się wybrać Selenium. Zdaję sobie sprawę, że Playwright może być uważany za lepszy wybór ze względu na 
+szybkość oraz obsługę dynamicznych elementów (np. pop-up)
+jendak pracuje na co dzień z użyciem Selenium i Javy, z Playwrightem nie mam doświadczenia.
 
 ## Endpoint używany przy wyszukiwaniu
 
@@ -29,4 +40,4 @@ Finalnie zastosowałam tam twarde `sleep(2)`.
 
 ## Raporty znalezionych błędów
 
-Raporty znajdują się w `/reports`. Dla każdego błędu utworzono osobny plik `.md`
+Raporty z części manualnej znajdują się w `/reports`. Dla dwóch wybranych błędów utworzono pliki `.md`
