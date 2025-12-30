@@ -8,4 +8,6 @@ def setup():
     driver.get("https://vod.film/")
     driver.maximize_window()
     yield driver
+    if hasattr(driver, "_test_failed"):
+        driver.save_screenshot("screenshots/test_failed.png")
     driver.quit()

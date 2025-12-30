@@ -1,5 +1,6 @@
 from time import sleep
 
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -88,11 +89,14 @@ class SearchPage(BasePage):
         self._click(self.MATCHED_MOVIE)
 
     def close_cookies(self, timeout=10):
-        """Close cookies"""
-        wait = WebDriverWait(self.driver, timeout)
-        wait.until(EC.element_to_be_clickable(self.COOKIE_AGREE))
-        banner_close = self.find(self.COOKIE_AGREE)
-        banner_close.click()
+        """Close cookies, if env is CI - pass"""
+        try:
+            wait = WebDriverWait(self.driver, timeout)
+            wait.until(EC.element_to_be_clickable(self.COOKIE_AGREE))
+            banner_close = self.find(self.COOKIE_AGREE)
+            banner_close.click()
+        except TimeoutException:
+            pass
 
     def wait_for_popup(self):
         """Wait for popup"""

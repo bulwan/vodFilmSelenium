@@ -1,7 +1,6 @@
 import pytest
 
 from pages.search_page import SearchPage
-from tests.ui.base_test import setup
 
 
 @pytest.mark.parametrize("search_text, should_find_results", [

@@ -25,15 +25,15 @@ def test_endpoint():
     except requests.exceptions.RequestException as e:
         pytest.fail("Can't reach API", e)
 
-    assert r.status_code == 200, f"Expected 200, actual: {r.status_code}"
+    assert r.status_code == 200, "Expected 200, actual: {r.status_code}"
 
     json_data = r.json()
 
-    assert "data" in json_data, f"Missing data"
-    assert isinstance(json_data["data"], list), f"Expected data to be a list"
-    assert len(json_data["data"]) > 0, f"Empty list"
+    assert "data" in json_data, "Missing data"
+    assert isinstance(json_data["data"], list), "Expected data to be a list"
+    assert len(json_data["data"]) > 0, "Empty list"
 
     first_movie = json_data["data"][0]
     movie_title = first_movie["title"].lower()
 
-    assert search_text.lower() in movie_title, f"Search text not found in movie title"
+    assert search_text.lower() in movie_title, "Search text not found in movie title"
