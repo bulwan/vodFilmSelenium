@@ -7,6 +7,7 @@ from pages.search_page import SearchPage
     ("The pickup", True),
     ("abcxyz123", False),
 ])
+@pytest.mark.ui
 def test_search_positive(setup, search_text, should_find_results):
     driver = setup
     page = SearchPage(driver)

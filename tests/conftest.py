@@ -1,4 +1,6 @@
 import os
+import time
+from datetime import datetime
 
 import pytest
 from selenium import webdriver
@@ -8,7 +10,7 @@ options = Options()
 
 
 @pytest.fixture(scope="function")
-def setup():
+def setup(request):
     if os.getenv('CI'):
         options.add_argument("--headless")
         options.add_argument("--no-sandbox")
@@ -17,8 +19,25 @@ def setup():
     if not os.getenv('CI'):
         options.add_argument("--start-maximized")
     driver = webdriver.Chrome(options=options)
+    request.node.driver = driver
     driver.get("https://vod.film/")
     yield driver
-    if hasattr(driver, "_test_failed"):
-        driver.save_screenshot("screenshots/test_failed.png")
     driver.quit()
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    rep = outcome.get_result()
+    if any(mark.name == "ui" for mark in item.own_markers):
+        if rep.failed and rep.when in ("setup", "call"):
+            driver = getattr(item, "driver", None)
+            if driver:
+                os.makedirs("teardowns", exist_ok=True)
+                time.sleep(1)
+                file_name = f'{item.originalname}_{datetime.today().strftime("%Y-%m-%d_%H-%M-%S")}.png'.replace(
+                    "/",
+                    "_").replace(
+                    "::", "__")
+                file_path = os.path.join("teardowns", file_name)
+                driver.save_screenshot(file_path)

@@ -2,6 +2,7 @@ import pytest
 import requests
 
 
+@pytest.mark.api
 def test_endpoint():
     api_endpoint = "https://vod.film/search-route"
     search_text = "The pickup"
