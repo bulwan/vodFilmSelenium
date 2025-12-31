@@ -38,9 +38,13 @@ jobs:
           flake8 . --exclude=venv,.venv,__pycache__ --count --max-line-length=120 --statistics
         continue-on-error: true
 
-      - name: Run tests
+      - name: Run API tests
         run: |
-          pytest --tb=short -v
+          pytest --tb=short -v -m api
+
+      - name: Run UI tests
+        run: |
+          pytest --tb=short -v -m ui
 
       - name: Upload screenshots on fail
         if: failure()
