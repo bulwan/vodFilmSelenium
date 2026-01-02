@@ -19,7 +19,7 @@ def test_search_positive(setup, search_text, should_find_results):
         page.open_first_result()
         assert page.is_title_visible(search_text)
         assert page.is_player_visible()
-        page.click_play_button()
+        page.play_video()
         page.wait_for_popup()
         before_url, actual_url = page.click_popup_button_and_check_new_url()
         assert before_url != actual_url

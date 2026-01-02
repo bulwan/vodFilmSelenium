@@ -1,6 +1,5 @@
 from time import sleep
 
-from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -18,7 +17,7 @@ class SearchPage(BasePage):
     MATCHED_MOVIE = (By.XPATH, '(//article/p/a)[1]')
     MOVIE_TITLE = (By.TAG_NAME, 'h1')
     VIDEO_PLAYER = (By.TAG_NAME, 'video')
-    PLAY_BUTTON = (By.CSS_SELECTOR, 'button[aria-label="Play"]')
+    VIDEO_WRAPPER = (By.CSS_SELECTOR, '.plyr__video-wrapper')
     POP_UP = (By.ID, 'popup')
     POP_UP_REGISTER_BUTTON = (By.ID, 'register-now')
 
@@ -76,27 +75,22 @@ class SearchPage(BasePage):
         wait.until(EC.visibility_of_element_located(self.VIDEO_PLAYER))
         return self.find(self.VIDEO_PLAYER)
 
-    def click_play_button(self):
-        """Click on the play button"""
-        wait = WebDriverWait(self.driver, self.timeout)
-        wait.until(EC.element_to_be_clickable(self.PLAY_BUTTON))
-        play_button = self.find(self.PLAY_BUTTON)
-        ActionChains(self.driver).scroll_to_element(play_button).perform()
-        self._click(self.PLAY_BUTTON)
+    def play_video(self):
+        """Click on wrapper of player"""
+        video_wrapper = self.find(self.VIDEO_WRAPPER)
+        ActionChains(self.driver).scroll_to_element(video_wrapper).perform()
+        self._click(self.VIDEO_WRAPPER)
 
     def open_first_result(self):
         """Open first result from search results"""
         self._click(self.MATCHED_MOVIE)
 
     def close_cookies(self, timeout=10):
-        """Close cookies, if env is CI - pass"""
-        try:
-            wait = WebDriverWait(self.driver, timeout)
-            wait.until(EC.element_to_be_clickable(self.COOKIE_AGREE))
-            banner_close = self.find(self.COOKIE_AGREE)
-            banner_close.click()
-        except TimeoutException:
-            pass
+        """Close cookies window"""
+        wait = WebDriverWait(self.driver, timeout)
+        wait.until(EC.element_to_be_clickable(self.COOKIE_AGREE))
+        banner_close = self.find(self.COOKIE_AGREE)
+        banner_close.click()
 
     def wait_for_popup(self):
         """Wait for popup"""
